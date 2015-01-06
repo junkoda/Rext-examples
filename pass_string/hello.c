@@ -5,7 +5,8 @@
 
 void hello(char** str)
 {
-  printf("Hello %s\n", *str);
+  if(str)
+    printf("Hello %s\n", *str);
 }
 
 // Vectorised. Also avoid segmentation fault when length(str) == 0
