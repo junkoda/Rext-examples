@@ -1,7 +1,7 @@
 dyn.load("hello.so")
 
-hello <- function(str) {
-  .C("hello", as.character(str))
+hello <- function(val) {
+  .C("hello", as.character(val))
   NULL
 }
 
@@ -12,9 +12,9 @@ hello(NULL)     # =>             (str == NULL in the C function)
 hello(list())   # =>             (zero elements; str == NULL in the C function)
 
 
-# What happends Without as.character()?
-hello0 <- function(str) {
-  .C("hello", str)
+# What happends without as.character()?
+hello0 <- function(val) {
+  .C("hello", val)
   NULL
 }
 
@@ -25,12 +25,12 @@ hello0("world") # => Hello world
 
 
 # Vectorised version. Now length is given as the second argument.
-hello2 <- function(str) {
-  .C("hello2", as.character(str), length(str))
+vhello <- function(val) {
+  .C("hello2", as.character(val), length(val))
   NULL
 }
 
-hello2(1:3)     # => Hello 1
+vhello(1:3)     # => Hello 1
                 #    Hello 2
                 #    Hello 3
 
